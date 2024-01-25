@@ -4,8 +4,10 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = ' '
 require('lazy').setup("eulegang.lazy")
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require('lspconfig')
 lspconfig.lua_ls.setup({
+	capabilities = capabilities,
 	settings = {
 		Lua = {
 			completion = {
@@ -17,6 +19,7 @@ lspconfig.lua_ls.setup({
 
 lspconfig.rust_analyzer.setup {
 	-- Server-specific settings. See `:help lspconfig-setup`
+	capabilities = capabilities,
 	settings = {
 		['rust-analyzer'] = {},
 	},
