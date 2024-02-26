@@ -7,27 +7,42 @@ require('lazy').setup("eulegang.lazy")
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require('lspconfig')
 lspconfig.lua_ls.setup({
-	capabilities = capabilities,
-	settings = {
-		Lua = {
-			completion = {
-				callSnippet = "Replace"
-			}
-		}
-	}
+    capabilities = capabilities,
+    settings = {
+        Lua = {
+            completion = {
+                callSnippet = "Replace"
+            }
+        }
+    }
 })
 
+lspconfig.biome.setup {}
+lspconfig.pylsp.setup {}
+lspconfig.pylyzer.setup {}
+lspconfig.tarpaulin.setup {
+    cmd = {
+        'tarballin',
+        '--connect',
+        '-',
+        '--log',
+        '/home/eulegang/tarpaulin.log',
+        '--level',
+        'trace'
+    },
+}
+
 lspconfig.rust_analyzer.setup {
-	-- Server-specific settings. See `:help lspconfig-setup`
-	capabilities = capabilities,
-	settings = {
-		['rust-analyzer'] = {},
-	},
-	diagnostics = {
-		globals = {
-			"vim"
-		}
-	},
+    -- Server-specific settings. See `:help lspconfig-setup`
+    capabilities = capabilities,
+    settings = {
+        ['rust-analyzer'] = {},
+    },
+    diagnostics = {
+        globals = {
+            "vim"
+        }
+    },
 }
 
 vim.o.wrap = false
